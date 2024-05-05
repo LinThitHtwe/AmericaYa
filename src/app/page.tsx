@@ -3,19 +3,26 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function Home() {
-  const [divs, setDivs] = useState([]);
-  const handleButtonClick = () => {
+interface Halo {
+  top: number;
+  left: number;
+  id: number;
+}
+
+export default function Home(): JSX.Element {
+  const [halos, setHalos] = useState<Halo[]>([]);
+
+  const handleButtonClick = (): void => {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const top = Math.floor(Math.random() * (windowHeight - 100));
     const left = Math.floor(Math.random() * (windowWidth - 200));
 
     const id = Date.now();
-    setDivs([...divs, { top, left, id }]);
+    setHalos([...halos, { top, left, id }]);
 
     setTimeout(() => {
-      setDivs((prevDivs) => prevDivs.filter((div) => div.id !== id));
+      setHalos((prev) => prev.filter((halo) => halo.id !== id));
     }, 3000);
   };
 
@@ -31,14 +38,14 @@ export default function Home() {
       >
         America Ya :D
       </motion.button>
-      {divs.map((div) => (
+      {halos.map((halo) => (
         <motion.div
-          key={div.id}
+          key={halo.id}
           initial={{ opacity: 0, x: -25, y: -15 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 1, type: "spring" }}
           className="absolute  rounded-lg"
-          style={{ top: `${div.top}px`, left: `${div.left}px` }}
+          style={{ top: `${halo.top}px`, left: `${halo.left}px` }}
         >
           <Image src={"/haloSingle.png"} width={80} height={80} alt="" />
         </motion.div>
