@@ -47,7 +47,7 @@ export default function Home(): JSX.Element {
           className="absolute  rounded-lg"
           style={{ top: `${halo.top}px`, left: `${halo.left}px` }}
         >
-          <Image src={"/haloSingle.png"} width={80} height={80} alt="" />
+          <Image src={"/haloSingle.png"} width={80} height={80} alt="Halo :D" />
         </motion.div>
       ))}
     </div>
